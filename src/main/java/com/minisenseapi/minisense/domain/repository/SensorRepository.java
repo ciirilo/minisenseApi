@@ -12,5 +12,7 @@ public interface SensorRepository extends JpaRepository<SensorDevice, Long> {
 	
 	boolean existsByChave(String chave);
 	List<SensorDevice> findByUserId(Long num);
+	SensorDevice findByChave(String chave);
+	
 	
 }

@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @SpringBootApplication
-@EnableSwagger2
+@EnableSwagger2 
 public class MinisenseApplication {
 
 	public static void main(String[] args) {

@@ -1,11 +1,13 @@
-create table data_stream (
+create table sensor_device (
 
 	id bigint  not null auto_increment,
-	chave varchar(32) not null,
+	chave varchar(50),
+	user_Id bigint(50),	
 	label varchar(50) not null,
-	enabled boolean not null,
-	measurement_Count bigint,
+	description varchar(60) not null,
+
 	
 	primary key (id),
 	constraint UNK_FIELDS unique(chave)
-)
+);
+

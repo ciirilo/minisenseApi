@@ -8,6 +8,6 @@ import com.minisenseapi.minisense.domain.model.DataStream;
 @Repository
 public interface DataStreamRepository extends JpaRepository<DataStream, Long> {
 	
-	
+	boolean existsByChave(String chave);
 
 }

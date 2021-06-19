@@ -1,44 +1,29 @@
-package com.minisenseapi.minisense.domain.model;
+package com.minisenseapi.minisense.api.model;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-/**
- * List of measures
- */
+import com.minisenseapi.minisense.domain.model.DataStream;
 
 @Entity
-public class Measurements   {
-	
+public class MeasurementsModel {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+	private Long id;
 	
-	@NotBlank
-	@Size(max = 10)
-  private String time;
-	
-	@NotBlank
-  private Float value;
-	
-	@NotBlank
-  private Long unitId;
-  
-  @JsonBackReference 
-  @ManyToOne
-  private DataStream data_stream;
 
-  public Measurements id(Long id) {
-    this.id = id;
-    return this;
-  }
+	private String time;
+	private Float value;
+	private Long unitId;
+  
+	
 
 public Long getId() {
 	return id;
@@ -72,13 +57,6 @@ public void setUnitId(Long unitId) {
 	this.unitId = unitId;
 }
 
-public DataStream getData_stream() {
-	return data_stream;
-}
-
-public void setData_stream(DataStream data_stream) {
-	this.data_stream = data_stream;
-}
 
 @Override
 public int hashCode() {
@@ -96,7 +74,7 @@ public boolean equals(Object obj) {
 		return false;
 	if (getClass() != obj.getClass())
 		return false;
-	Measurements other = (Measurements) obj;
+	MeasurementsModel other = (MeasurementsModel) obj;
 	if (id == null) {
 		if (other.id != null)
 			return false;
@@ -104,7 +82,7 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
-
- 
+  
+  
+	
 }
-

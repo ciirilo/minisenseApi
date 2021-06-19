@@ -1,45 +1,65 @@
-package com.minisenseapi.minisense.domain.model;
+package com.minisenseapi.minisense.api.model;
 
-import java.util.Objects;
-
-import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-/**
- * MeasurementUnit
- */
 @Entity
-public class Unit   {
+public class SensorDeviceModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String symbol;
+	private String chave;
+	
+	private String label;
+	
 	private String description;
+	
+	@JsonManagedReference	
+  	@OneToMany(mappedBy = "sensor_model")
+  	private List<DataStreamModel> streams = new ArrayList<>();
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getSymbol() {
-		return symbol;
+
+	public String getChave() {
+		return chave;
 	}
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
+
+	public void setChave(String chave) {
+		this.chave = chave;
 	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -47,6 +67,7 @@ public class Unit   {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,7 +76,7 @@ public class Unit   {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Unit other = (Unit) obj;
+		SensorDeviceModel other = (SensorDeviceModel) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -66,4 +87,3 @@ public class Unit   {
 	
 	
 }
-

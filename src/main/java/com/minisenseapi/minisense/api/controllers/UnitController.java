@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -38,19 +39,22 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/unit")
 public class UnitController {
 
 	@Autowired
     private UnitRepository unitRepository;
     
+	@ApiOperation("Retorna uma lista de unidades de medida")
     @GetMapping
+    @RequestMapping( value = "/unit", method = RequestMethod.GET, produces="application/json")
 	public List<Unit> read() {
 		return unitRepository.findAll();
 	}
 	
 	
+    @ApiOperation("Registra uma unidade")
     @PostMapping
+    @RequestMapping( value = "/unit", method = RequestMethod.POST, produces="application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Unit> create(@RequestBody Unit unit) {
 		

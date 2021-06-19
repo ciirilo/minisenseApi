@@ -11,5 +11,6 @@ import com.minisenseapi.minisense.domain.model.Unit;
 public interface UnitRepository extends JpaRepository<Unit, Long>{
 	
 	boolean existsBySymbol(String symbol);
+	boolean existsById(Long id);
 	
 }
