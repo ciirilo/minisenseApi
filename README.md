@@ -1,5 +1,5 @@
 
-Spring Boot Server 
+Spring Boot Api 
 
 ## MiniSense Api
 
