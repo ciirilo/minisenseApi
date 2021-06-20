@@ -50,13 +50,5 @@ public class CadastroStreamService {
 		streamRepository.deleteById(stream_id);
 	}
 	
-	private DataStream buscar(Long stream_id) {
-		
-		return streamRepository.findById(stream_id)
-				.orElseThrow(() -> new HandlerException("Stream não encontrada"));
-	}
-	
-	
-	
 	
 }

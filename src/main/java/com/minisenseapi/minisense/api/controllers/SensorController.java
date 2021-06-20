@@ -3,7 +3,6 @@ package com.minisenseapi.minisense.api.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.Query;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -26,7 +25,6 @@ import com.minisenseapi.minisense.domain.model.Measurements;
 import com.minisenseapi.minisense.domain.model.SensorDevice;
 import com.minisenseapi.minisense.domain.repository.MeasurementsRepository;
 import com.minisenseapi.minisense.domain.repository.SensorRepository;
-import com.minisenseapi.minisense.domain.repository.UserRepository;
 import com.minisenseapi.minisense.domain.service.CadastroSensorService;
 
 import io.swagger.annotations.ApiOperation;
@@ -53,9 +51,6 @@ public class SensorController {
 	@Autowired
 	private MeasurementsRepository measurementsRepository;
     
-	@Autowired
-    private UserRepository userRepository;
-	
 
 	@ApiOperation("Retorna um dispositivo específico")
 	@GetMapping
@@ -93,12 +88,6 @@ public class SensorController {
 		return modelMapper.map(sensor, SensorDeviceModel.class);
 	}
 	
-	
-	private List<SensorDeviceModel> toCollectionModel(List<SensorDevice> sensorDevice) {
-		return sensorDevice.stream()
-				.map(sensor -> toModel(sensor))
-				.collect(Collectors.toList());
-	}
 	
 	private DataStream toMaxResults(DataStream stream){
 		

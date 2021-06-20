@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.minisenseapi.minisense.api.model.DataStreamModel;
+
 import com.minisenseapi.minisense.api.model.SensorModel;
 import com.minisenseapi.minisense.domain.exception.HandlerException;
-import com.minisenseapi.minisense.domain.model.DataStream;
+
 import com.minisenseapi.minisense.domain.model.SensorDevice;
 import com.minisenseapi.minisense.domain.model.User;
 import com.minisenseapi.minisense.domain.repository.SensorRepository;
@@ -109,21 +109,6 @@ public class UserController {
 		return sensorDevice.stream()
 				.map(sensor -> toModel(sensor))
 				.collect(Collectors.toList());
-	}
-	
-	private SensorDevice setDataModel(SensorDevice sensor) {
-		List<DataStream> data = sensor.getStreams();
-		
-		data.stream()
-			.map(d -> toModel(d))
-			.collect(Collectors.toList());
-		sensor.setStreams(data);
-		
-		return sensor;
-	}
-	
-	private DataStreamModel toModel(DataStream data) {
-		return modelMapper.map(data, DataStreamModel.class);
 	}
 	
 	

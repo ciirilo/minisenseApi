@@ -1,7 +1,6 @@
 package com.minisenseapi.minisense.api.exceptionHandler;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;

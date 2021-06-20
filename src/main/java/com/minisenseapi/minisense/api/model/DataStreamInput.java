@@ -1,5 +1,7 @@
 package com.minisenseapi.minisense.api.model;
 
+
+
 public class DataStreamInput {
 	
 	private String label;

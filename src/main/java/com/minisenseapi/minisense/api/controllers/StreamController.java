@@ -22,7 +22,6 @@ import com.minisenseapi.minisense.api.model.DataStreamModel;
 import com.minisenseapi.minisense.domain.exception.HandlerException;
 import com.minisenseapi.minisense.domain.model.DataStream;
 import com.minisenseapi.minisense.domain.repository.DataStreamRepository;
-import com.minisenseapi.minisense.domain.repository.SensorRepository;
 import com.minisenseapi.minisense.domain.repository.UnitRepository;
 import com.minisenseapi.minisense.domain.service.CadastroStreamService;
 
@@ -40,9 +39,6 @@ public class StreamController {
 	@Autowired
 	private CadastroStreamService cadastroStreamService;
 	
-	@Autowired
-    private SensorRepository sensorRepository;
-    
 	@Autowired
     private DataStreamRepository streamRepository;
 	

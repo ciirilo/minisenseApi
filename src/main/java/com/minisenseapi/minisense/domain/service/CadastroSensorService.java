@@ -41,10 +41,5 @@ public class CadastroSensorService {
 		sensorRepository.deleteById(sensor_id);
 	}
 	
-	private User buscar(Long user_id) {
-		
-		return userRepository.findById(user_id)
-				.orElseThrow(() -> new HandlerException("Usuário não existe"));
-	}
 	
 }
