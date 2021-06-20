@@ -93,7 +93,7 @@ public class UserController {
 		
 		if(userRepository.existsByEmail(user.getEmail())) {
 			
-			 throw new HandlerException("Usuário já existe");
+			 throw new HandlerException("Usuário já cadastrado com esse e-mail");
 		}
 		
 		return ResponseEntity.ok(userRepository.save(user));

@@ -52,7 +52,7 @@ public class UnitController {
 	}
 	
 	
-    @ApiOperation("Registra uma unidade")
+    @ApiOperation("Registra uma unidade de medida")
     @PostMapping
     @RequestMapping( value = "/unit", method = RequestMethod.POST, produces="application/json")
 	@ResponseStatus(HttpStatus.CREATED)

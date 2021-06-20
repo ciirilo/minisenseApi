@@ -44,7 +44,7 @@ public class MeasureController  {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	@ApiOperation("Registra um medição em uma stream")
+	@ApiOperation("Registra um medição em uma datastream")
 	@PostMapping
 	@RequestMapping(value = "/stream/{stream_id}/measure", method = RequestMethod.POST, produces="application/json")
 	@ResponseStatus(HttpStatus.CREATED)

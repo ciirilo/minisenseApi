@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -24,17 +25,17 @@ public class SensorDevice   {
 	private Long id;
  
 
-  //@Enumerated(EnumType.STRING)
+  @NotBlank
   private String chave;
   
 
   @Column
   private Long userId;
 
-
+  @NotBlank
   private String label;
 
-
+  @NotBlank
   private String description;
   
   @JsonManagedReference 

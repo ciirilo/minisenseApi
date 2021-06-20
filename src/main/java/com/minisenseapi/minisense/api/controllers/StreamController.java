@@ -51,7 +51,7 @@ public class StreamController {
 	private ModelMapper modelMapper;
 	
 	
-	@ApiOperation("Retorna uma stream específica")
+	@ApiOperation("Retorna uma datastream específica")
 	@GetMapping
 	@RequestMapping( value = "/stream/{streamId}", method = RequestMethod.GET, produces="application/json")
     public ResponseEntity<DataStream> list(@PathVariable Long streamId){

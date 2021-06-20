@@ -109,7 +109,7 @@ public Long getMeasurementCount() {
 public void setMeasurementCount(Long measurementCount) {
 	this.measurementCount = measurementCount;
 }
-/*
+
 public List<Measurements> getMeasurement() {
 	return measurement;
 }
@@ -117,7 +117,7 @@ public List<Measurements> getMeasurement() {
 public void setMeasurement(List<Measurements> measurement) {
 	this.measurement = measurement;
 }
-*/
+
 @Override
 public int hashCode() {
 	final int prime = 31;

@@ -3,6 +3,7 @@ package com.minisenseapi.minisense.api.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Query;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.minisenseapi.minisense.api.model.SensorDeviceInput;
 import com.minisenseapi.minisense.api.model.SensorDeviceModel;
 import com.minisenseapi.minisense.domain.exception.HandlerException;
+import com.minisenseapi.minisense.domain.model.DataStream;
+import com.minisenseapi.minisense.domain.model.Measurements;
 import com.minisenseapi.minisense.domain.model.SensorDevice;
 import com.minisenseapi.minisense.domain.repository.MeasurementsRepository;
 import com.minisenseapi.minisense.domain.repository.SensorRepository;
@@ -54,16 +57,21 @@ public class SensorController {
     private UserRepository userRepository;
 	
 
-	@ApiOperation("Retorna um sensor específico")
+	@ApiOperation("Retorna um dispositivo específico")
 	@GetMapping
 	@RequestMapping( value = "/sensor/{chave}", method = RequestMethod.GET, produces="application/json")
     public SensorDevice find(@PathVariable String chave){
     	
 		SensorDevice sensor = sensorRepository.findByChave(chave);
-		
 		if(sensor == null) {
 			throw new HandlerException("Sensor não existe");
 		}
+		
+		List<DataStream> stream = sensor.getStreams();
+		stream.stream()
+			.map(s -> toMaxResults(s))
+			.collect(Collectors.toList());
+		sensor.setStreams(stream);
 		
     	return sensor;
     	
@@ -81,7 +89,6 @@ public class SensorController {
 		
 	}
 	
-	
 	private SensorDeviceModel toModel(SensorDevice sensor) {
 		return modelMapper.map(sensor, SensorDeviceModel.class);
 	}
@@ -91,6 +98,17 @@ public class SensorController {
 		return sensorDevice.stream()
 				.map(sensor -> toModel(sensor))
 				.collect(Collectors.toList());
+	}
+	
+	private DataStream toMaxResults(DataStream stream){
+		
+		Long streamId = stream.getId();
+		List<Measurements> measurements = measurementsRepository.list(streamId);
+		stream.setMeasurement(measurements);
+		
+		return stream;
+		
+	
 	}
 	
 	
