@@ -3,8 +3,7 @@ Spring Boot Api
 
 ## MiniSense Api
 
-Mude os valores do seu usuário e senha do banco de dados em = src/man/resources/application.properties
-
+Mude os valores do seu usuário e senha do banco de dados (MySql) em = src/man/resources/application.properties
 
 Acesse a app através do endereço
 
