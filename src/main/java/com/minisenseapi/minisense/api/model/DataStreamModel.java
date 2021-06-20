@@ -9,11 +9,9 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
-@Entity
+
 public class DataStreamModel  {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String chave;
@@ -25,10 +23,7 @@ public class DataStreamModel  {
 	private Long device_id;  
 	
 	private Long measurementCount;
-	
-	@JsonBackReference
-	@ManyToOne 
-	private SensorModel sensor_model;
+
 
 	
 	public Long getId() {

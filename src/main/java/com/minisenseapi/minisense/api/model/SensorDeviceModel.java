@@ -24,9 +24,7 @@ public class SensorDeviceModel {
 	
 	private String description;
 	
-	@JsonManagedReference	
-  	@OneToMany(mappedBy = "sensor_model")
-  	private List<DataStreamModel> streams = new ArrayList<>();
+
 
 	public Long getId() {
 		return id;

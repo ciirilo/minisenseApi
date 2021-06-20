@@ -1,8 +1,8 @@
 package com.minisenseapi.minisense.api.controllers;
 
-import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.minisenseapi.minisense.api.model.DataStreamInput;
 import com.minisenseapi.minisense.api.model.DataStreamModel;
 import com.minisenseapi.minisense.domain.exception.HandlerException;
 import com.minisenseapi.minisense.domain.model.DataStream;
@@ -23,7 +24,6 @@ import com.minisenseapi.minisense.domain.repository.SensorRepository;
 import com.minisenseapi.minisense.domain.repository.UnitRepository;
 import com.minisenseapi.minisense.domain.service.CadastroStreamService;
 
-import eye2web.modelmapper.ModelMapper;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -68,11 +68,8 @@ public class StreamController {
 	@PostMapping
 	@RequestMapping( value = "/stream/{sensor_device_id}", method = RequestMethod.POST, produces="application/json" , consumes="application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public DataStreamModel create(@RequestBody DataStream dataStream, @PathVariable Long sensor_device_id) {
+	public DataStreamModel create(@RequestBody DataStreamInput dataStream, @PathVariable Long sensor_device_id) {
 		
-		if(streamRepository.existsByChave(dataStream.getChave())) {
-			throw new HandlerException("DataStream já existe");
-		}
 		
 		unitRepository.findById(dataStream.getUnit_Id())
 		.orElseThrow(() -> new HandlerException("Unidade não existe"));

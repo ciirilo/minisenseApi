@@ -3,6 +3,7 @@ package com.minisenseapi.minisense.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.minisenseapi.minisense.api.model.DataStreamInput;
 import com.minisenseapi.minisense.domain.exception.HandlerException;
 import com.minisenseapi.minisense.domain.model.DataStream;
 import com.minisenseapi.minisense.domain.model.SensorDevice;
@@ -27,20 +28,18 @@ public class CadastroStreamService {
 	
 	
 	
-	public DataStream salvar(Long sensor_id, DataStream stream) {
+	public DataStream salvar(Long sensor_id, DataStreamInput streamInput) {
 		
 		SensorDevice sensor = sensorDeviceRepository.findById(sensor_id)
 				.orElseThrow(() -> new HandlerException("Sensor não encontrado"));
 		
-		if(sensorDeviceRepository.existsByChave(stream.getChave())) {
-			throw new HandlerException("Sensor já existe");
-		}
+		DataStream stream = new DataStream();
 		
 		
 		stream.setChave(gerarHash.generate());
 		stream.setEnabled(stream.getEnabled());
-		stream.setLabel(stream.getLabel());
-		stream.setUnit_Id(stream.getUnit_Id());
+		stream.setLabel(streamInput.getLabel());
+		stream.setUnit_Id(streamInput.getUnit_Id());
 		stream.setSensor_device(sensor);
 		
 		

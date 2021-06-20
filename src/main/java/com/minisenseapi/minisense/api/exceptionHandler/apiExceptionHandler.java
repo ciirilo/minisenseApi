@@ -1,4 +1,4 @@
-package com.minisenseapi.minisense.api.model.exceptionHandler;
+package com.minisenseapi.minisense.api.exceptionHandler;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

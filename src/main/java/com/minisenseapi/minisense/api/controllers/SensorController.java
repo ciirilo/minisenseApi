@@ -1,9 +1,11 @@
 package com.minisenseapi.minisense.api.controllers;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +17,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.minisenseapi.minisense.api.model.SensorDeviceInput;
 import com.minisenseapi.minisense.api.model.SensorDeviceModel;
-import com.minisenseapi.minisense.api.model.SensorModel;
 import com.minisenseapi.minisense.domain.exception.HandlerException;
 import com.minisenseapi.minisense.domain.model.SensorDevice;
-import com.minisenseapi.minisense.domain.model.User;
 import com.minisenseapi.minisense.domain.repository.MeasurementsRepository;
 import com.minisenseapi.minisense.domain.repository.SensorRepository;
 import com.minisenseapi.minisense.domain.repository.UserRepository;
 import com.minisenseapi.minisense.domain.service.CadastroSensorService;
 
-import eye2web.modelmapper.ModelMapper;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -73,18 +73,18 @@ public class SensorController {
 	@PostMapping
 	@RequestMapping( value = "/sensor/{userId}", method = RequestMethod.POST, produces="application/json" , consumes="application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public SensorDeviceModel create(@RequestBody SensorDevice sensorDevice, @PathVariable Long userId) {
+	public SensorDeviceModel create(@Valid @RequestBody SensorDeviceInput sensorDeviceInput, @PathVariable Long userId) {
 		
-		SensorDevice sensor = cadastroSensorService.salvar(userId, sensorDevice);
+		SensorDevice sensor = cadastroSensorService.salvar(userId, sensorDeviceInput);
 		
 		return toModel(sensorRepository.save(sensor));
 		
 	}
 	
+	
 	private SensorDeviceModel toModel(SensorDevice sensor) {
 		return modelMapper.map(sensor, SensorDeviceModel.class);
 	}
-	
 	
 	
 	private List<SensorDeviceModel> toCollectionModel(List<SensorDevice> sensorDevice) {

@@ -2,6 +2,7 @@ package com.minisenseapi.minisense.api.controllers;
 
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.minisenseapi.minisense.api.model.MeasurementsInput;
 import com.minisenseapi.minisense.api.model.MeasurementsModel;
 import com.minisenseapi.minisense.domain.model.DataStream;
 import com.minisenseapi.minisense.domain.model.Measurements;
@@ -19,7 +21,6 @@ import com.minisenseapi.minisense.domain.repository.DataStreamRepository;
 import com.minisenseapi.minisense.domain.repository.MeasurementsRepository;
 import com.minisenseapi.minisense.domain.service.CadastroMeasurementsService;
 
-import eye2web.modelmapper.ModelMapper;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -43,11 +44,11 @@ public class MeasureController  {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	@ApiOperation("Regista um medição em uma stream")
+	@ApiOperation("Registra um medição em uma stream")
 	@PostMapping
 	@RequestMapping(value = "/stream/{stream_id}/measure", method = RequestMethod.POST, produces="application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public MeasurementsModel create(@Valid @RequestBody Measurements measurements, @PathVariable Long stream_id) {
+	public MeasurementsModel create(@Valid @RequestBody MeasurementsInput measurements, @PathVariable Long stream_id) {
 		
 		Measurements measure = cadastroMeasurementsService.create(stream_id, measurements);
 		DataStream data = dataStreamRepository.findById(stream_id).get();

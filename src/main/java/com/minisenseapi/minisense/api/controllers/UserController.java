@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +19,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.minisenseapi.minisense.api.model.DataStreamModel;
 import com.minisenseapi.minisense.api.model.SensorModel;
 import com.minisenseapi.minisense.domain.exception.HandlerException;
+import com.minisenseapi.minisense.domain.model.DataStream;
 import com.minisenseapi.minisense.domain.model.SensorDevice;
 import com.minisenseapi.minisense.domain.model.User;
 import com.minisenseapi.minisense.domain.repository.SensorRepository;
 import com.minisenseapi.minisense.domain.repository.UserRepository;
 
-import eye2web.modelmapper.ModelMapper;
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -65,14 +68,19 @@ public class UserController {
     	if(!user.isPresent()) {
     		throw new HandlerException("Usuário não existe");
     	}
+    	
+    	
 		
 		List<SensorDevice> list =sensorRepository.findByUserId(userId);
+
+		
 		
 		if(list.isEmpty()) {
 			throw new HandlerException("Usuário não possui Sensores");
 		}
 		
 		return toCollectionModel(list);
+		
 					
 	}
 	
@@ -81,6 +89,7 @@ public class UserController {
 	@RequestMapping( value = "/user", method = RequestMethod.POST, produces="application/json" , consumes="application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<User> create(@Valid @RequestBody User user) {
+		
 		
 		if(userRepository.existsByEmail(user.getEmail())) {
 			
@@ -101,5 +110,21 @@ public class UserController {
 				.map(sensor -> toModel(sensor))
 				.collect(Collectors.toList());
 	}
+	
+	private SensorDevice setDataModel(SensorDevice sensor) {
+		List<DataStream> data = sensor.getStreams();
+		
+		data.stream()
+			.map(d -> toModel(d))
+			.collect(Collectors.toList());
+		sensor.setStreams(data);
+		
+		return sensor;
+	}
+	
+	private DataStreamModel toModel(DataStream data) {
+		return modelMapper.map(data, DataStreamModel.class);
+	}
+	
 	
 }

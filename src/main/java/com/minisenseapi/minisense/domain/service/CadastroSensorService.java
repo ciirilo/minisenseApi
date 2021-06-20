@@ -3,6 +3,7 @@ package com.minisenseapi.minisense.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.minisenseapi.minisense.api.model.SensorDeviceInput;
 import com.minisenseapi.minisense.domain.exception.HandlerException;
 import com.minisenseapi.minisense.domain.model.SensorDevice;
 import com.minisenseapi.minisense.domain.model.User;
@@ -21,20 +22,17 @@ public class CadastroSensorService {
 	@Autowired
 	private GerarHash gerarHash;
 	
-	public SensorDevice salvar(Long user_id, SensorDevice sensor) {
+	public SensorDevice salvar(Long user_id, SensorDeviceInput sensorInput) {
 		
 		User user = userRepository.findById(user_id)
 				.orElseThrow(() -> new HandlerException("Usuário não existe"));
 		
-		if(sensorRepository.existsByChave(sensor.getChave())) {
-			throw new HandlerException("Sensor já existe");
-		}
+		SensorDevice sensor = new SensorDevice();
 		
 		sensor.setUserId(user_id);
 		sensor.setChave(gerarHash.generate());
-		sensor.setChave(sensor.getChave());
-		sensor.setDescription(sensor.getDescription());
-		sensor.setLabel(sensor.getLabel());
+		sensor.setDescription(sensorInput.getDescription());
+		sensor.setLabel(sensorInput.getLabel());
 		
 		return sensorRepository.save(sensor);
 	}

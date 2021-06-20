@@ -22,9 +22,8 @@ public class SensorModel {
 	private String label;
 
 	private String description;
-  
 
-  	private List<DataStreamModel> streams = new ArrayList<>();
+  	private List<DataStreamModel> streams;
 
  
 	public Long getId() {
