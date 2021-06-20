@@ -1,13 +1,10 @@
 package com.minisenseapi.minisense.domain.model;
 
-import java.util.Objects;
-
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 
 /**
@@ -20,8 +17,13 @@ public class Unit   {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	private String symbol;
+	
+	@NotBlank
 	private String description;
+	
+	
 	public Long getId() {
 		return id;
 	}

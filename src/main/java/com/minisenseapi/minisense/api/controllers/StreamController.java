@@ -2,6 +2,8 @@ package com.minisenseapi.minisense.api.controllers;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -68,7 +70,7 @@ public class StreamController {
 	@PostMapping
 	@RequestMapping( value = "/stream/{sensor_device_id}", method = RequestMethod.POST, produces="application/json" , consumes="application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public DataStreamModel create(@RequestBody DataStreamInput dataStream, @PathVariable Long sensor_device_id) {
+	public DataStreamModel create(@Valid @RequestBody DataStreamInput dataStream, @PathVariable Long sensor_device_id) {
 		
 		
 		unitRepository.findById(dataStream.getUnit_Id())

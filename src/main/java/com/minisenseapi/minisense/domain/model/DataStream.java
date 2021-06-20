@@ -8,14 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-/**
- * DataStream
- */
 
 @Entity
 public class DataStream   {
@@ -24,31 +21,31 @@ public class DataStream   {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
   	private Long id;
 
-  
-  private String chave;
+	@NotBlank
+	private String chave;
 
-  
-  private String label;
+	@NotBlank
+  	private String label;
 
-  
-  private Boolean enabled = true;
+	@NotBlank
+  	private Boolean enabled = true;
 
+	@NotBlank
+  	private Long unit_Id;
   
-  private Long unit_Id;
-  
-  private Long measurementCount = 0L;
+  	private Long measurementCount = 0L;
   
   	@JsonManagedReference 
 	@OneToMany(mappedBy = "data_stream")
 	private List<Measurements> measurement;
   
-  @JsonBackReference 
-  @ManyToOne 
-  private SensorDevice sensor_device;
+  	@JsonBackReference 
+  	@ManyToOne 
+  	private SensorDevice sensor_device;
 
 
   
-  public SensorDevice getSensor_device() {
+public SensorDevice getSensor_device() {
 	return sensor_device;
 }
 

@@ -1,10 +1,11 @@
 package com.minisenseapi.minisense.api.model;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class SensorDeviceInput {
 	
-	@NotBlank
+	@NotNull
 	private String label;
 	
 	@NotBlank
