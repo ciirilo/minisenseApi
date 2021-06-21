@@ -22,13 +22,19 @@ public class DataStream   {
   	private Long id;
 
 	@NotBlank
+	private Integer alert_max_value;
+	
+	@NotBlank
+	private Integer alert_min_value;
+	
+	@NotBlank
 	private String chave;
-
+	
 	@NotBlank
   	private String label;
 
 	@NotBlank
-  	private Boolean enabled = true;
+  	private Boolean enabled;
 
 	@NotBlank
   	private Long unit_Id;
@@ -111,9 +117,27 @@ public List<Measurements> getMeasurement() {
 	return measurement;
 }
 
+public Integer getAlertMaxValue() {
+	return alert_max_value;
+}
+
+public void setAlertMaxValue(Integer alertMaxValue) {
+	this.alert_max_value = alertMaxValue;
+}
+
+public Integer getAlertMinValue() {
+	return alert_min_value;
+}
+
+public void setAlertMinValue(Integer alertMinValue) {
+	this.alert_min_value = alertMinValue;
+}
+
 public void setMeasurement(List<Measurements> measurement) {
 	this.measurement = measurement;
 }
+
+
 
 @Override
 public int hashCode() {

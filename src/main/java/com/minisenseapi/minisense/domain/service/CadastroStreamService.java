@@ -35,9 +35,10 @@ public class CadastroStreamService {
 		
 		DataStream stream = new DataStream();
 		
-		
+		stream.setAlertMaxValue(streamInput.getAlertMaxValue());
+		stream.setAlertMinValue(streamInput.getAlertMinValue());
 		stream.setChave(gerarHash.generate());
-		stream.setEnabled(stream.getEnabled());
+		stream.setEnabled(true);
 		stream.setLabel(streamInput.getLabel());
 		stream.setUnit_Id(streamInput.getUnit_Id());
 		stream.setSensor_device(sensor);

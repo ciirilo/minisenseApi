@@ -69,19 +69,13 @@ public class UserController {
     		throw new HandlerException("Usuário não existe");
     	}
     	
-    	
-		
 		List<SensorDevice> list =sensorRepository.findByUserId(userId);
 
-		
-		
 		if(list.isEmpty()) {
 			throw new HandlerException("Usuário não possui Sensores");
 		}
 		
-		return toCollectionModel(list);
-		
-					
+		return toCollectionModel(list);			
 	}
 	
 	@ApiOperation("Registra um usuário")
@@ -90,26 +84,20 @@ public class UserController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<User> create(@Valid @RequestBody User user) {
 		
-		
 		if(userRepository.existsByEmail(user.getEmail())) {
-			
 			 throw new HandlerException("Usuário já cadastrado com esse e-mail");
 		}
 		
 		return ResponseEntity.ok(userRepository.save(user));
-		
 	}
 
 	private SensorModel toModel(SensorDevice sensor) {
 		return modelMapper.map(sensor, SensorModel.class);
 	}
 	
-	
 	private List<SensorModel> toCollectionModel(List<SensorDevice> sensorDevice) {
 		return sensorDevice.stream()
 				.map(sensor -> toModel(sensor))
 				.collect(Collectors.toList());
 	}
-	
-	
 }

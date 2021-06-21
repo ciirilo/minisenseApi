@@ -6,8 +6,24 @@ public class DataStreamInput {
 	
 	private String label;
 	private Long unit_Id;
+	private Integer alertMaxValue;
+	private Integer alertMinValue;
 	
 	
+	
+	
+	public Integer getAlertMaxValue() {
+		return alertMaxValue;
+	}
+	public void setAlertMaxValue(Integer alertMaxValue) {
+		this.alertMaxValue = alertMaxValue;
+	}
+	public Integer getAlertMinValue() {
+		return alertMinValue;
+	}
+	public void setAlertMinValue(Integer alertMinValue) {
+		this.alertMinValue = alertMinValue;
+	}
 	public String getLabel() {
 		return label;
 	}

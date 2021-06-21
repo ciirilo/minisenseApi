@@ -51,7 +51,6 @@ public class SensorController {
 	@Autowired
 	private MeasurementsRepository measurementsRepository;
     
-
 	@ApiOperation("Retorna um dispositivo específico")
 	@GetMapping
 	@RequestMapping( value = "/sensor/{chave}", method = RequestMethod.GET, produces="application/json")
@@ -61,7 +60,6 @@ public class SensorController {
 		if(sensor == null) {
 			throw new HandlerException("Sensor não existe");
 		}
-		
 		List<DataStream> stream = sensor.getStreams();
 		stream.stream()
 			.map(s -> toMaxResults(s))
@@ -69,7 +67,6 @@ public class SensorController {
 		sensor.setStreams(stream);
 		
     	return sensor;
-    	
     }
 	
 	@ApiOperation("Registra dispositivo para um usuário")
@@ -80,8 +77,7 @@ public class SensorController {
 		
 		SensorDevice sensor = cadastroSensorService.salvar(userId, sensorDeviceInput);
 		
-		return toModel(sensorRepository.save(sensor));
-		
+		return toModel(sensorRepository.save(sensor));	
 	}
 	
 	private SensorDeviceModel toModel(SensorDevice sensor) {

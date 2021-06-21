@@ -68,7 +68,6 @@ public class StreamController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public DataStreamModel create(@Valid @RequestBody DataStreamInput dataStream, @PathVariable Long sensor_device_id) {
 		
-		
 		unitRepository.findById(dataStream.getUnit_Id())
 		.orElseThrow(() -> new HandlerException("Unidade não existe"));
 		
